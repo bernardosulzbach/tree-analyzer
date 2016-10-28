@@ -48,7 +48,6 @@ missing
 waves
 
 # CMake
-build/
 compile_commands.json
 cmake_install.cmake
 CMakeFiles/
@@ -56,3 +55,7 @@ CMakeCache.txt
 
 # Python
 *.pyc
+
+# Project
+build/
+input/
