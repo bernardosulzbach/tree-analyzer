@@ -1,6 +1,6 @@
 #include "report.h"
 
-Report make_report(void) {
+Report report_create(void) {
   Report report;
   report.time = 0;
   report.nodes = 0;

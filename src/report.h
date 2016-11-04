@@ -10,6 +10,6 @@ typedef struct Report {
   unsigned long rotations;
 } Report;
 
-Report make_report(void);
+Report report_create(void);
 
 #endif
