@@ -6,6 +6,9 @@
 
 static Report last_report;
 
+static AVLTree *avl_root = NULL;
+static BinarySearchTree *bst_root = NULL;
+
 void insert_values(char *filename) { printf("Inserting from %s\n", filename); }
 
 void query_values(char *filename) { printf("Querying from %s\n", filename); }
@@ -30,7 +33,8 @@ void execute_instructions(char *filename) {
 int main(int argc, char **argv) {
   /* Should have a valid report at all times. */
   last_report = report_create();
-  statistics();
+  binary_search_tree_initialize(&bst_root);
+  AVL_tree_initialize(&avl_root);
   if (argc < 2) {
     printf("Pass a filename to the program.\n");
   } else if (argc == 2) {
@@ -38,5 +42,7 @@ int main(int argc, char **argv) {
   } else {
     printf("Pass just a filename to the program.\n");
   }
+  binary_search_tree_free(&bst_root);
+  AVL_tree_free(&avl_root);
   return 0;
 }
