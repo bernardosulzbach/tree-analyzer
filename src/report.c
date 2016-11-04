@@ -15,5 +15,5 @@ Report report_create(void) {
 void report_clock_start(Report *report) { report->time = clock(); }
 
 void report_clock_stop(Report *report) {
-  report->time = clock() - report->time;
+  report->time = 1000 * (clock() - report->time) / CLOCKS_PER_SEC;
 }
