@@ -183,20 +183,26 @@ Element BST_get(Report *report, BST *tree, Key key) {
 
 /**
  * Inserts the (key, element) pair in the tree if it does not exist yet or
- * changes the element currently pointed by
+ * changes the element currently pointed by the key.
+ *
+ * This function is not recursive.
  */
 void BST_insert(Report *report, BST **root, Key key, Element element) {
-  BST *tree = *root;
-  if (tree == NULL) {
+  while (*root != NULL) {
+    report->comparisons++;
+    if ((*root)->key == key) {
+      /* Key collision, will replace element. */
+      break;
+    } else if (key_less_than(key, (*root)->key)) {
+      root = &((*root)->left);
+    } else {
+      root = &((*root)->right);
+    }
+  }
+  if (*root == NULL) {
     *root = create_node(key, element);
   } else {
-    if (tree->key == key) {
-      tree->data = element;
-    } else if (key_less_than(key, tree->key)) {
-      BST_insert(report, &tree->left, key, element);
-    } else {
-      BST_insert(report, &tree->right, key, element);
-    }
+    (*root)->data = element;
   }
 }
 
