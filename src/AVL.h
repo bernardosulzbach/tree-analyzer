@@ -1,5 +1,5 @@
-#ifndef AVL_TREE_H
-#define AVL_TREE_H
+#ifndef AVL_H
+#define AVL_H
 
 #include "constants.h"
 #include <stdlib.h>
