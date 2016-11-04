@@ -22,7 +22,8 @@ void insert_values(char *filename) {
       BST_insert(&bst_report, &bst_root, value, value);
     }
     report_clock_stop(&bst_report);
-    fclose(file);
+    fclose(file); /* Close the stream before updating the report. */
+    BST_update_report(&bst_report, bst_root);
   }
   file = fopen(filename, "r");
   if (file) {
@@ -32,7 +33,8 @@ void insert_values(char *filename) {
       AVL_insert(&avl_report, &avl_root, value, value);
     }
     report_clock_stop(&avl_report);
-    fclose(file);
+    fclose(file); /* Close the stream before updating the report. */
+    AVL_update_report(&avl_report, avl_root);
   }
 }
 
@@ -68,6 +70,8 @@ int main(int argc, char **argv) {
   bst_report = report_create();
   BST_initialize(&bst_root);
   AVL_initialize(&avl_root);
+  insert_values("input/n100000.txt");
+  statistics();
   if (argc < 2) {
     printf("Pass a filename to the program.\n");
   } else if (argc == 2) {

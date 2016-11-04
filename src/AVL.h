@@ -22,6 +22,8 @@ int AVL_is_empty(AVL *tree);
 
 size_t AVL_size(AVL *tree);
 
+void AVL_update_report(Report *report, AVL *tree);
+
 /**
  * Returns whether or not the tree contains an element with the specified key.
  */

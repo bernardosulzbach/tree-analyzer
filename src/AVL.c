@@ -155,15 +155,36 @@ static int get_balance(AVL *tree) {
   return balance;
 }
 
-static int get_height(AVL *tree) {
+static int AVL_height(AVL *tree) {
   if (tree != NULL) {
     return tree->height;
   }
   return 0;
 }
 
+static long AVL_balance_factor(AVL *tree) {
+  long balance_here;
+  long factor_here;
+  long factor_left;
+  long factor_right;
+  if (tree == NULL) {
+    return 0;
+  }
+  balance_here = get_balance(tree);
+  factor_here = labs(balance_here);
+  factor_left = AVL_balance_factor(tree->left);
+  factor_right = AVL_balance_factor(tree->right);
+  if (factor_left > factor_here) {
+    factor_here = factor_left;
+  }
+  if (factor_left > factor_here) {
+    factor_here = factor_right;
+  }
+  return factor_here;
+}
+
 static void update_height(AVL *root) {
-  root->height = max(get_height(root->left), get_height(root->right)) + 1;
+  root->height = max(AVL_height(root->left), AVL_height(root->right)) + 1;
 }
 
 void rotate_right(AVL **root) {
@@ -220,11 +241,11 @@ void AVL_insert(Report *report, AVL **root, Key key, Element element) {
       tree->data = element;
     } else if (key_less_than(key, tree->key)) {
       AVL_insert(report, &tree->left, key, element);
-      tree->height = max(get_height(tree->left), get_height(tree->right)) + 1;
+      tree->height = max(AVL_height(tree->left), AVL_height(tree->right)) + 1;
       rebalance(root);
     } else {
       AVL_insert(report, &tree->right, key, element);
-      tree->height = max(get_height(tree->left), get_height(tree->right)) + 1;
+      tree->height = max(AVL_height(tree->left), AVL_height(tree->right)) + 1;
       rebalance(root);
     }
   }
@@ -259,7 +280,7 @@ void AVL_remove(Report *report, AVL **root, Key key) {
           replacement->right = NULL;
         }
         *root = replacement;
-        tree->height = max(get_height(tree->left), get_height(tree->right)) + 1;
+        tree->height = max(AVL_height(tree->left), AVL_height(tree->right)) + 1;
         rebalance(root);
       } else {
         *root = NULL;
@@ -267,32 +288,21 @@ void AVL_remove(Report *report, AVL **root, Key key) {
     } else if (key_less_than(key, tree->key)) {
       /* Propagate removal to the left child. */
       AVL_remove(report, &tree->left, key);
-      tree->height = max(get_height(tree->left), get_height(tree->right)) + 1;
+      tree->height = max(AVL_height(tree->left), AVL_height(tree->right)) + 1;
       rebalance(root);
     } else {
       /* Propagate removal to the right child. */
       AVL_remove(report, &tree->right, key);
-      tree->height = max(get_height(tree->left), get_height(tree->right)) + 1;
+      tree->height = max(AVL_height(tree->left), AVL_height(tree->right)) + 1;
       rebalance(root);
     }
   }
 }
 
-size_t AVL_depth(AVL *tree) {
-  size_t left_depth;
-  size_t right_depth;
-  size_t maximum_child_depth;
-  if (tree == NULL) {
-    return 0;
-  }
-  left_depth = AVL_depth(tree->left);
-  right_depth = AVL_depth(tree->right);
-  if (left_depth >= right_depth) {
-    maximum_child_depth = left_depth;
-  } else {
-    maximum_child_depth = right_depth;
-  }
-  return 1 + maximum_child_depth;
+void AVL_update_report(Report *report, AVL *tree) {
+  report->nodes = AVL_size(tree);
+  report->height = AVL_height(tree);
+  report->factor = AVL_balance_factor(tree);
 }
 
 void print_AVL_tree(AVL *tree) {

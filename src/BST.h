@@ -20,6 +20,8 @@ int BST_is_empty(BST *tree);
 
 size_t BST_size(BST *tree);
 
+void BST_update_report(Report *report, BST *tree);
+
 /**
  * Returns whether or not the tree contains an element with the specified key.
  */

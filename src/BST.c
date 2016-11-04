@@ -108,6 +108,54 @@ size_t BST_size(BST *tree) {
   return count;
 }
 
+static size_t BST_height(BST *tree) {
+  size_t left_height;
+  size_t right_height;
+  size_t maximum_child_height;
+  if (tree == NULL) {
+    return 0;
+  }
+  left_height = BST_height(tree->left);
+  right_height = BST_height(tree->right);
+  if (left_height >= right_height) {
+    maximum_child_height = left_height;
+  } else {
+    maximum_child_height = right_height;
+  }
+  return 1 + maximum_child_height;
+}
+
+static long BST_balance_factor(BST *tree) {
+  long height_left;
+  long height_right;
+  long balance_here;
+  long factor_here;
+  long factor_left;
+  long factor_right;
+  if (tree == NULL) {
+    return 0;
+  }
+  height_left = (long)BST_height(tree->left);
+  height_right = (long)BST_height(tree->right);
+  balance_here = labs(height_left - height_right);
+  factor_left = BST_balance_factor(tree->left);
+  factor_right = BST_balance_factor(tree->left);
+  factor_here = balance_here;
+  if (factor_left > factor_here) {
+    factor_here = factor_left;
+  }
+  if (factor_left > factor_here) {
+    factor_here = factor_right;
+  }
+  return factor_here;
+}
+
+void BST_update_report(Report *report, BST *tree) {
+  report->nodes = BST_size(tree);
+  report->height = BST_height(tree);
+  report->factor = BST_balance_factor(tree);
+}
+
 /**
  * Returns whether or not the tree contains an element with the specified key.
  */
@@ -208,23 +256,6 @@ BST *lowest_common_ancestor(BST *tree, Key a, Key b) {
     }
   }
   return tree;
-}
-
-size_t BST_depth(BST *tree) {
-  size_t left_depth;
-  size_t right_depth;
-  size_t maximum_child_depth;
-  if (tree == NULL) {
-    return 0;
-  }
-  left_depth = BST_depth(tree->left);
-  right_depth = BST_depth(tree->right);
-  if (left_depth >= right_depth) {
-    maximum_child_depth = left_depth;
-  } else {
-    maximum_child_depth = right_depth;
-  }
-  return 1 + maximum_child_depth;
 }
 
 void BST_print(BST *tree) {
