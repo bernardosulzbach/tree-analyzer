@@ -170,6 +170,7 @@ int BST_contains(Report *report, BST *tree, Key key) {
 Element BST_get(Report *report, BST *tree, Key key) {
   Element element = NULL_ELEMENT;
   if (tree != NULL) {
+    report->comparisons++;
     if (tree->key == key) {
       element = tree->data;
     } else if (key_less_than(key, tree->key)) {
@@ -212,6 +213,7 @@ void BST_remove(Report *report, BST **root, Key key) {
   BST *right = NULL;
   BST *replacement = NULL;
   if (tree != NULL) {
+    report->comparisons++;
     if (tree->key == key) {
       if (tree->left != NULL) {
         replacement = detach_greatest(&tree->left);
