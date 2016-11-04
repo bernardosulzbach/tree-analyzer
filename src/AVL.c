@@ -15,9 +15,9 @@
  *
  * If memory allocation fails, NULL is returned.
  */
-AVLTree *create_AVL_node(Key key, Element element) {
-  AVLTree *tree;
-  tree = malloc(sizeof(AVLTree));
+AVL *create_AVL_node(Key key, Element element) {
+  AVL *tree;
+  tree = malloc(sizeof(AVL));
   if (tree != NULL) {
     tree->key = key;
     tree->data = element;
@@ -39,9 +39,9 @@ static int max(int a, int b) {
  * Removes the element with the smallest key from the tree and returns a
  * pointer to it.
  */
-static AVLTree *detach_smallest(AVLTree **root) {
-  AVLTree *iter = *root;
-  AVLTree *prev = iter;
+static AVL *detach_smallest(AVL **root) {
+  AVL *iter = *root;
+  AVL *prev = iter;
   while (iter != NULL && iter->left != NULL) {
     prev = iter;
     iter = iter->left;
@@ -56,9 +56,9 @@ static AVLTree *detach_smallest(AVLTree **root) {
  * Removes the element with the greatest key from the tree and returns a
  * pointer to it.
  */
-static AVLTree *detach_greatest(AVLTree **root) {
-  AVLTree *iter = *root;
-  AVLTree *prev = iter;
+static AVL *detach_greatest(AVL **root) {
+  AVL *iter = *root;
+  AVL *prev = iter;
   while (iter != NULL && iter->right != NULL) {
     prev = iter;
     iter = iter->right;
@@ -69,10 +69,10 @@ static AVLTree *detach_greatest(AVLTree **root) {
   return iter;
 }
 
-void print_AVL_tree_indented(AVLTree *tree, int level) {
+void print_AVL_indented(AVL *tree, int level) {
   int i;
   if (tree->right != NULL) {
-    print_AVL_tree_indented(tree->right, level + DEFAULT_INDENT);
+    print_AVL_indented(tree->right, level + DEFAULT_INDENT);
   }
   for (i = 0; i < level; i++) {
     printf(" ");
@@ -82,7 +82,7 @@ void print_AVL_tree_indented(AVLTree *tree, int level) {
   print_element(tree->data);
   printf("\n");
   if (tree->left != NULL) {
-    print_AVL_tree_indented(tree->left, level + DEFAULT_INDENT);
+    print_AVL_indented(tree->left, level + DEFAULT_INDENT);
   }
 }
 
@@ -91,26 +91,26 @@ void print_AVL_tree_indented(AVLTree *tree, int level) {
  * Tree.
  */
 
-void AVL_tree_initialize(AVLTree **root) { *root = NULL; }
+void AVL_initialize(AVL **root) { *root = NULL; }
 
-void AVL_tree_free(AVLTree **root) {
-  AVLTree *tree = *root;
+void AVL_free(AVL **root) {
+  AVL *tree = *root;
   if (tree != NULL) {
-    AVL_tree_free(&tree->left);
-    AVL_tree_free(&tree->right);
+    AVL_free(&tree->left);
+    AVL_free(&tree->right);
     free(tree);
   }
   *root = NULL;
 }
 
-int AVL_tree_is_empty(AVLTree *tree) { return tree == NULL; }
+int AVL_is_empty(AVL *tree) { return tree == NULL; }
 
-size_t AVL_tree_size(AVLTree *tree) {
+size_t AVL_size(AVL *tree) {
   size_t count = 0;
   if (tree != NULL) {
     count = 1;
-    count += AVL_tree_size(tree->left);
-    count += AVL_tree_size(tree->right);
+    count += AVL_size(tree->left);
+    count += AVL_size(tree->right);
   }
   return count;
 }
@@ -118,29 +118,31 @@ size_t AVL_tree_size(AVLTree *tree) {
 /**
  * Returns whether or not the tree contains an element with the specified key.
  */
-int AVL_tree_contains(AVLTree *tree, Key key) {
-  return AVL_tree_get(tree, key) != NULL_ELEMENT;
+int AVL_contains(Report *report, AVL *tree, Key key) {
+  return AVL_get(report, tree, key) != NULL_ELEMENT;
 }
 
 /**
  * Returns the element associated with the specified key in the Binary Search
  * Tree or NULL_ELEMENT if the key is not present in the tree.
  */
-Element AVL_tree_get(AVLTree *tree, Key key) {
+Element AVL_get(Report *report, AVL *tree, Key key) {
   Element element = NULL_ELEMENT;
   if (tree != NULL) {
+    /* Will make a comparison. */
+    report->comparisons++;
     if (tree->key == key) {
       element = tree->data;
     } else if (key_less_than(key, tree->key)) {
-      element = AVL_tree_get(tree->left, key);
+      element = AVL_get(report, tree->left, key);
     } else {
-      element = AVL_tree_get(tree->right, key);
+      element = AVL_get(report, tree->right, key);
     }
   }
   return element;
 }
 
-static int get_balance(AVLTree *tree) {
+static int get_balance(AVL *tree) {
   int balance = 0;
   if (tree != NULL) {
     if (tree->left != NULL) {
@@ -153,20 +155,20 @@ static int get_balance(AVLTree *tree) {
   return balance;
 }
 
-static int get_height(AVLTree *tree) {
+static int get_height(AVL *tree) {
   if (tree != NULL) {
     return tree->height;
   }
   return 0;
 }
 
-static void update_height(AVLTree *root) {
+static void update_height(AVL *root) {
   root->height = max(get_height(root->left), get_height(root->right)) + 1;
 }
 
-void rotate_right(AVLTree **root) {
-  AVLTree *tree = *root;
-  AVLTree *swap;
+void rotate_right(AVL **root) {
+  AVL *tree = *root;
+  AVL *swap;
   swap = tree->left;
   tree->left = swap->right;
   swap->right = tree;
@@ -176,9 +178,9 @@ void rotate_right(AVLTree **root) {
   *root = tree;
 }
 
-void rotate_left(AVLTree **root) {
-  AVLTree *tree = *root;
-  AVLTree *swap;
+void rotate_left(AVL **root) {
+  AVL *tree = *root;
+  AVL *swap;
   swap = tree->right;
   tree->right = swap->left;
   swap->left = tree;
@@ -188,8 +190,8 @@ void rotate_left(AVLTree **root) {
   *root = tree;
 }
 
-void rebalance(AVLTree **root) {
-  AVLTree *tree = *root;
+void rebalance(AVL **root) {
+  AVL *tree = *root;
   if (tree != NULL) {
     if (get_balance(tree) < -1) {
       if (get_balance(tree->left) > 0) {
@@ -209,30 +211,30 @@ void rebalance(AVLTree **root) {
  * Inserts the (key, element) pair in the tree if it does not exist yet or
  * changes the element currently pointed by
  */
-void AVL_tree_insert(AVLTree **root, Key key, Element element) {
-  AVLTree *tree = *root;
+void AVL_insert(Report *report, AVL **root, Key key, Element element) {
+  AVL *tree = *root;
   if (tree == NULL) {
     *root = create_AVL_node(key, element);
   } else {
     if (tree->key == key) {
       tree->data = element;
     } else if (key_less_than(key, tree->key)) {
-      AVL_tree_insert(&tree->left, key, element);
+      AVL_insert(report, &tree->left, key, element);
       tree->height = max(get_height(tree->left), get_height(tree->right)) + 1;
       rebalance(root);
     } else {
-      AVL_tree_insert(&tree->right, key, element);
+      AVL_insert(report, &tree->right, key, element);
       tree->height = max(get_height(tree->left), get_height(tree->right)) + 1;
       rebalance(root);
     }
   }
 }
 
-void AVL_tree_remove(AVLTree **root, Key key) {
-  AVLTree *tree = *root;
-  AVLTree *left = NULL;
-  AVLTree *right = NULL;
-  AVLTree *replacement = NULL;
+void AVL_remove(Report *report, AVL **root, Key key) {
+  AVL *tree = *root;
+  AVL *left = NULL;
+  AVL *right = NULL;
+  AVL *replacement = NULL;
   if (tree != NULL) {
     if (tree->key == key) {
       if (tree->left != NULL) {
@@ -264,27 +266,27 @@ void AVL_tree_remove(AVLTree **root, Key key) {
       }
     } else if (key_less_than(key, tree->key)) {
       /* Propagate removal to the left child. */
-      AVL_tree_remove(&tree->left, key);
+      AVL_remove(report, &tree->left, key);
       tree->height = max(get_height(tree->left), get_height(tree->right)) + 1;
       rebalance(root);
     } else {
       /* Propagate removal to the right child. */
-      AVL_tree_remove(&tree->right, key);
+      AVL_remove(report, &tree->right, key);
       tree->height = max(get_height(tree->left), get_height(tree->right)) + 1;
       rebalance(root);
     }
   }
 }
 
-size_t AVL_tree_depth(AVLTree *tree) {
+size_t AVL_depth(AVL *tree) {
   size_t left_depth;
   size_t right_depth;
   size_t maximum_child_depth;
   if (tree == NULL) {
     return 0;
   }
-  left_depth = AVL_tree_depth(tree->left);
-  right_depth = AVL_tree_depth(tree->right);
+  left_depth = AVL_depth(tree->left);
+  right_depth = AVL_depth(tree->right);
   if (left_depth >= right_depth) {
     maximum_child_depth = left_depth;
   } else {
@@ -293,10 +295,10 @@ size_t AVL_tree_depth(AVLTree *tree) {
   return 1 + maximum_child_depth;
 }
 
-void print_AVL_tree(AVLTree *tree) {
+void print_AVL_tree(AVL *tree) {
   if (tree == NULL) {
     printf("Empty tree.\n");
   } else {
-    print_AVL_tree_indented(tree, 0);
+    print_AVL_indented(tree, 0);
   }
 }

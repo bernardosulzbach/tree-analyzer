@@ -1,40 +1,40 @@
 #ifndef BST_H
 #define BST_H
 
+#include "constants.h"
+#include "report.h"
 #include <stdlib.h>
 
-#include "constants.h"
-
-typedef struct BinarySearchTree {
+typedef struct BST {
   Key key;
   Element data;
-  struct BinarySearchTree *left;
-  struct BinarySearchTree *right;
-} BinarySearchTree;
+  struct BST *left;
+  struct BST *right;
+  Report report;
+} BST;
 
-void binary_search_tree_initialize(BinarySearchTree **root);
-void binary_search_tree_free(BinarySearchTree **root);
+void BST_initialize(BST **root);
+void BST_free(BST **root);
 
-int binary_search_tree_is_empty(BinarySearchTree *tree);
+int BST_is_empty(BST *tree);
 
-size_t binary_search_tree_size(BinarySearchTree *tree);
+size_t BST_size(BST *tree);
 
 /**
  * Returns whether or not the tree contains an element with the specified key.
  */
-int binary_search_tree_contains(BinarySearchTree *tree, Key key);
+int BST_contains(Report *report, BST *tree, Key key);
 
 /**
  * Returns the element associated with the specified key in the Binary Search
  * Tree or NULL_ELEMENT if the key is not present in the tree.
  */
-Element binary_search_tree_get(BinarySearchTree *tree, Key key);
+Element BST_get(Report *report, BST *tree, Key key);
 
-void binary_search_tree_insert(BinarySearchTree **root, Key key,
-                               Element element);
+void BST_insert(Report *report, BST **root, Key key, Element element);
 
-void binary_search_tree_remove(BinarySearchTree **root, Key key);
+void BST_remove(Report *report, BST **root, Key key);
 
-void print_binary_search_tree(BinarySearchTree *tree);
+void BST_print(BST *tree);
 
 #endif

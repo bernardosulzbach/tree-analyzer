@@ -12,4 +12,8 @@ typedef struct Report {
 
 Report report_create(void);
 
+void report_clock_start(Report *report);
+
+void report_clock_stop(Report *report);
+
 #endif

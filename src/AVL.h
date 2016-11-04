@@ -2,38 +2,41 @@
 #define AVL_H
 
 #include "constants.h"
+#include "report.h"
 #include <stdlib.h>
 
-typedef struct AVLTree {
+typedef struct AVL {
   Key key;
   Element data;
   int height;
-  struct AVLTree *left;
-  struct AVLTree *right;
-} AVLTree;
+  struct AVL *left;
+  struct AVL *right;
+  Report report;
+} AVL;
 
-void AVL_tree_initialize(AVLTree **root);
-void AVL_tree_free(AVLTree **root);
+void AVL_initialize(AVL **root);
 
-int AVL_tree_is_empty(AVLTree *tree);
+void AVL_free(AVL **root);
 
-size_t AVL_tree_size(AVLTree *tree);
+int AVL_is_empty(AVL *tree);
+
+size_t AVL_size(AVL *tree);
 
 /**
  * Returns whether or not the tree contains an element with the specified key.
  */
-int AVL_tree_contains(AVLTree *tree, Key key);
+int AVL_contains(Report *report, AVL *tree, Key key);
 
 /**
  * Returns the element associated with the specified key in the Binary Search
  * Tree or NULL_ELEMENT if the key is not present in the tree.
  */
-Element AVL_tree_get(AVLTree *tree, Key key);
+Element AVL_get(Report *report, AVL *tree, Key key);
 
-void AVL_tree_insert(AVLTree **root, Key key, Element element);
+void AVL_insert(Report *report, AVL **root, Key key, Element element);
 
-void AVL_tree_remove(AVLTree **root, Key key);
+void AVL_remove(Report *report, AVL **root, Key key);
 
-void print_AVL_tree(AVLTree *tree);
+void print_AVL_tree(AVL *tree);
 
 #endif

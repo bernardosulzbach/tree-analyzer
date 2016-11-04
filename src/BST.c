@@ -16,9 +16,9 @@
  *
  * If memory allocation fails, NULL is returned.
  */
-BinarySearchTree *create_node(Key key, Element element) {
-  BinarySearchTree *tree;
-  tree = malloc(sizeof(BinarySearchTree));
+BST *create_node(Key key, Element element) {
+  BST *tree;
+  tree = malloc(sizeof(BST));
   if (tree != NULL) {
     tree->key = key;
     tree->data = element;
@@ -32,9 +32,9 @@ BinarySearchTree *create_node(Key key, Element element) {
  * Removes the element with the smallest key from the tree and returns a
  * pointer to it.
  */
-BinarySearchTree *detach_smallest(BinarySearchTree **root) {
-  BinarySearchTree *iter = *root;
-  BinarySearchTree *prev = iter;
+BST *detach_smallest(BST **root) {
+  BST *iter = *root;
+  BST *prev = iter;
   while (iter != NULL && iter->left != NULL) {
     prev = iter;
     iter = iter->left;
@@ -49,9 +49,9 @@ BinarySearchTree *detach_smallest(BinarySearchTree **root) {
  * Removes the element with the greatest key from the tree and returns a
  * pointer to it.
  */
-BinarySearchTree *detach_greatest(BinarySearchTree **root) {
-  BinarySearchTree *iter = *root;
-  BinarySearchTree *prev = iter;
+BST *detach_greatest(BST **root) {
+  BST *iter = *root;
+  BST *prev = iter;
   while (iter != NULL && iter->right != NULL) {
     prev = iter;
     iter = iter->right;
@@ -62,10 +62,10 @@ BinarySearchTree *detach_greatest(BinarySearchTree **root) {
   return iter;
 }
 
-void print_binary_search_tree_indented(BinarySearchTree *tree, int level) {
+void print_BST_indented(BST *tree, int level) {
   int i;
   if (tree->left != NULL) {
-    print_binary_search_tree_indented(tree->left, level + DEFAULT_INDENT);
+    print_BST_indented(tree->left, level + DEFAULT_INDENT);
   }
   for (i = 0; i < level; i++) {
     printf(" ");
@@ -75,7 +75,7 @@ void print_binary_search_tree_indented(BinarySearchTree *tree, int level) {
   print_element(tree->data);
   printf("\n");
   if (tree->right != NULL) {
-    print_binary_search_tree_indented(tree->right, level + DEFAULT_INDENT);
+    print_BST_indented(tree->right, level + DEFAULT_INDENT);
   }
 }
 
@@ -84,26 +84,26 @@ void print_binary_search_tree_indented(BinarySearchTree *tree, int level) {
  * Tree.
  */
 
-void binary_search_tree_initialize(BinarySearchTree **root) { *root = NULL; }
+void BST_initialize(BST **root) { *root = NULL; }
 
-void binary_search_tree_free(BinarySearchTree **root) {
-  BinarySearchTree *tree = *root;
+void BST_free(BST **root) {
+  BST *tree = *root;
   if (tree != NULL) {
-    binary_search_tree_free(&tree->left);
-    binary_search_tree_free(&tree->right);
+    BST_free(&tree->left);
+    BST_free(&tree->right);
     free(tree);
   }
   *root = NULL;
 }
 
-int binary_search_tree_is_empty(BinarySearchTree *tree) { return tree == NULL; }
+int BST_is_empty(BST *tree) { return tree == NULL; }
 
-size_t binary_search_tree_size(BinarySearchTree *tree) {
+size_t BST_size(BST *tree) {
   size_t count = 0;
   if (tree != NULL) {
     count = 1;
-    count += binary_search_tree_size(tree->left);
-    count += binary_search_tree_size(tree->right);
+    count += BST_size(tree->left);
+    count += BST_size(tree->right);
   }
   return count;
 }
@@ -111,23 +111,23 @@ size_t binary_search_tree_size(BinarySearchTree *tree) {
 /**
  * Returns whether or not the tree contains an element with the specified key.
  */
-int binary_search_tree_contains(BinarySearchTree *tree, Key key) {
-  return binary_search_tree_get(tree, key) != NULL_ELEMENT;
+int BST_contains(Report *report, BST *tree, Key key) {
+  return BST_get(report, tree, key) != NULL_ELEMENT;
 }
 
 /**
  * Returns the element associated with the specified key in the Binary Search
  * Tree or NULL_ELEMENT if the key is not present in the tree.
  */
-Element binary_search_tree_get(BinarySearchTree *tree, Key key) {
+Element BST_get(Report *report, BST *tree, Key key) {
   Element element = NULL_ELEMENT;
   if (tree != NULL) {
     if (tree->key == key) {
       element = tree->data;
     } else if (key_less_than(key, tree->key)) {
-      element = binary_search_tree_get(tree->left, key);
+      element = BST_get(report, tree->left, key);
     } else {
-      element = binary_search_tree_get(tree->right, key);
+      element = BST_get(report, tree->right, key);
     }
   }
   return element;
@@ -137,27 +137,26 @@ Element binary_search_tree_get(BinarySearchTree *tree, Key key) {
  * Inserts the (key, element) pair in the tree if it does not exist yet or
  * changes the element currently pointed by
  */
-void binary_search_tree_insert(BinarySearchTree **root, Key key,
-                               Element element) {
-  BinarySearchTree *tree = *root;
+void BST_insert(Report *report, BST **root, Key key, Element element) {
+  BST *tree = *root;
   if (tree == NULL) {
     *root = create_node(key, element);
   } else {
     if (tree->key == key) {
       tree->data = element;
     } else if (key_less_than(key, tree->key)) {
-      binary_search_tree_insert(&tree->left, key, element);
+      BST_insert(report, &tree->left, key, element);
     } else {
-      binary_search_tree_insert(&tree->right, key, element);
+      BST_insert(report, &tree->right, key, element);
     }
   }
 }
 
-void binary_search_tree_remove(BinarySearchTree **root, Key key) {
-  BinarySearchTree *tree = *root;
-  BinarySearchTree *left = NULL;
-  BinarySearchTree *right = NULL;
-  BinarySearchTree *replacement = NULL;
+void BST_remove(Report *report, BST **root, Key key) {
+  BST *tree = *root;
+  BST *left = NULL;
+  BST *right = NULL;
+  BST *replacement = NULL;
   if (tree != NULL) {
     if (tree->key == key) {
       if (tree->left != NULL) {
@@ -187,17 +186,17 @@ void binary_search_tree_remove(BinarySearchTree **root, Key key) {
       }
     } else if (key_less_than(key, tree->key)) {
       /* Propagate removal to the left child. */
-      binary_search_tree_remove(&tree->left, key);
+      BST_remove(report, &tree->left, key);
     } else {
       /* Propagate removal to the right child. */
-      binary_search_tree_remove(&tree->right, key);
+      BST_remove(report, &tree->right, key);
     }
   }
   /* Write back any changes that have been made. */
   *root = tree;
 }
 
-BinarySearchTree *lowest_common_ancestor(BinarySearchTree *tree, Key a, Key b) {
+BST *lowest_common_ancestor(BST *tree, Key a, Key b) {
   if (tree == NULL) {
     return NULL;
   }
@@ -211,15 +210,15 @@ BinarySearchTree *lowest_common_ancestor(BinarySearchTree *tree, Key a, Key b) {
   return tree;
 }
 
-size_t binary_search_tree_depth(BinarySearchTree *tree) {
+size_t BST_depth(BST *tree) {
   size_t left_depth;
   size_t right_depth;
   size_t maximum_child_depth;
   if (tree == NULL) {
     return 0;
   }
-  left_depth = binary_search_tree_depth(tree->left);
-  right_depth = binary_search_tree_depth(tree->right);
+  left_depth = BST_depth(tree->left);
+  right_depth = BST_depth(tree->right);
   if (left_depth >= right_depth) {
     maximum_child_depth = left_depth;
   } else {
@@ -228,10 +227,10 @@ size_t binary_search_tree_depth(BinarySearchTree *tree) {
   return 1 + maximum_child_depth;
 }
 
-void print_binary_search_tree(BinarySearchTree *tree) {
+void BST_print(BST *tree) {
   if (tree == NULL) {
     printf("Empty tree.\n");
   } else {
-    print_binary_search_tree_indented(tree, 0);
+    print_BST_indented(tree, 0);
   }
 }
