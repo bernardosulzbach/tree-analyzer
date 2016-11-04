@@ -237,6 +237,7 @@ void AVL_insert(Report *report, AVL **root, Key key, Element element) {
   if (tree == NULL) {
     *root = create_AVL_node(key, element);
   } else {
+    report->comparisons++;
     if (tree->key == key) {
       tree->data = element;
     } else if (key_less_than(key, tree->key)) {
@@ -257,6 +258,7 @@ void AVL_remove(Report *report, AVL **root, Key key) {
   AVL *right = NULL;
   AVL *replacement = NULL;
   if (tree != NULL) {
+    report->comparisons++;
     if (tree->key == key) {
       if (tree->left != NULL) {
         replacement = detach_greatest(&tree->left);
