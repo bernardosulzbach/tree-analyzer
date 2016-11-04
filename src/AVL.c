@@ -187,7 +187,7 @@ static void update_height(AVL *root) {
   root->height = max(AVL_height(root->left), AVL_height(root->right)) + 1;
 }
 
-void rotate_right(AVL **root) {
+static void rotate_right(AVL **root) {
   AVL *tree = *root;
   AVL *swap;
   swap = tree->left;
@@ -199,7 +199,7 @@ void rotate_right(AVL **root) {
   *root = tree;
 }
 
-void rotate_left(AVL **root) {
+static void rotate_left(AVL **root) {
   AVL *tree = *root;
   AVL *swap;
   swap = tree->right;
@@ -211,19 +211,23 @@ void rotate_left(AVL **root) {
   *root = tree;
 }
 
-void rebalance(AVL **root) {
+void rebalance(Report *report, AVL **root) {
   AVL *tree = *root;
   if (tree != NULL) {
     if (get_balance(tree) < -1) {
       if (get_balance(tree->left) > 0) {
         rotate_right(&tree->left);
+        report->rotations++;
       }
       rotate_left(root);
+      report->rotations++;
     } else if (get_balance(tree) > 1) {
       if (get_balance(tree->left) < 0) {
         rotate_left(&tree->left);
+        report->rotations++;
       }
       rotate_right(root);
+      report->rotations++;
     }
   }
 }
@@ -242,12 +246,12 @@ void AVL_insert(Report *report, AVL **root, Key key, Element element) {
       tree->data = element;
     } else if (key_less_than(key, tree->key)) {
       AVL_insert(report, &tree->left, key, element);
-      tree->height = max(AVL_height(tree->left), AVL_height(tree->right)) + 1;
-      rebalance(root);
+      update_height(tree);
+      rebalance(report, root);
     } else {
       AVL_insert(report, &tree->right, key, element);
-      tree->height = max(AVL_height(tree->left), AVL_height(tree->right)) + 1;
-      rebalance(root);
+      update_height(tree);
+      rebalance(report, root);
     }
   }
 }
@@ -283,7 +287,7 @@ void AVL_remove(Report *report, AVL **root, Key key) {
         }
         *root = replacement;
         tree->height = max(AVL_height(tree->left), AVL_height(tree->right)) + 1;
-        rebalance(root);
+        rebalance(report, root);
       } else {
         *root = NULL;
       }
@@ -291,12 +295,12 @@ void AVL_remove(Report *report, AVL **root, Key key) {
       /* Propagate removal to the left child. */
       AVL_remove(report, &tree->left, key);
       tree->height = max(AVL_height(tree->left), AVL_height(tree->right)) + 1;
-      rebalance(root);
+      rebalance(report, root);
     } else {
       /* Propagate removal to the right child. */
       AVL_remove(report, &tree->right, key);
       tree->height = max(AVL_height(tree->left), AVL_height(tree->right)) + 1;
-      rebalance(root);
+      rebalance(report, root);
     }
   }
 }
