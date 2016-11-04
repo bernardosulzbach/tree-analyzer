@@ -42,21 +42,20 @@ void query_values(char *filename) { printf("Querying from %s\n", filename); }
 
 void remove_values(char *filename) { printf("Removing from %s\n", filename); }
 
+static void print_report(Report report) {
+  printf("Time: %ld ms\n", report.time);
+  printf("Nodes: %ld\n", report.nodes);
+  printf("Height: %ld\n", report.height);
+  printf("Factor: %ld\n", report.factor);
+  printf("Comparisons: %ld\n", report.comparisons);
+  printf("Rotations: %ld\n", report.rotations);
+}
+
 void statistics(void) {
   printf("Statistics for BST:\n");
-  printf("Time: %ld ms\n", bst_report.time);
-  printf("Nodes: %ld\n", bst_report.nodes);
-  printf("Height: %ld\n", bst_report.height);
-  printf("Factor: %ld\n", bst_report.factor);
-  printf("Comparisons: %ld\n", bst_report.comparisons);
-  printf("Roations: %ld\n", bst_report.rotations);
+  print_report(bst_report);
   printf("Statistics for AVL:\n");
-  printf("Time: %ld ms\n", avl_report.time);
-  printf("Nodes: %ld\n", avl_report.nodes);
-  printf("Height: %ld\n", avl_report.height);
-  printf("Factor: %ld\n", avl_report.factor);
-  printf("Comparisons: %ld\n", avl_report.comparisons);
-  printf("Roations: %ld\n", avl_report.rotations);
+  print_report(avl_report);
 }
 
 void execute_instructions(char *filename) {
@@ -70,7 +69,7 @@ int main(int argc, char **argv) {
   bst_report = report_create();
   BST_initialize(&bst_root);
   AVL_initialize(&avl_root);
-  insert_values("input/n100000.txt");
+  insert_values("input/n1000.txt");
   statistics();
   if (argc < 2) {
     printf("Pass a filename to the program.\n");
