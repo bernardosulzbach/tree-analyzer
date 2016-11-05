@@ -42,11 +42,14 @@ static int max(int a, int b) {
 static AVL *detach_smallest(AVL **root) {
   AVL *iter = *root;
   AVL *prev = iter;
-  while (iter != NULL && iter->left != NULL) {
+  if (iter == NULL) {
+    return NULL;
+  }
+  while (iter->left != NULL) {
     prev = iter;
     iter = iter->left;
   }
-  if (iter != NULL && iter != prev) {
+  if (iter != prev) {
     prev->left = iter->right;
   }
   return iter;
@@ -59,11 +62,14 @@ static AVL *detach_smallest(AVL **root) {
 static AVL *detach_greatest(AVL **root) {
   AVL *iter = *root;
   AVL *prev = iter;
-  while (iter != NULL && iter->right != NULL) {
+  if (iter == NULL) {
+    return NULL;
+  }
+  while (iter->right != NULL) {
     prev = iter;
     iter = iter->right;
   }
-  if (iter != NULL && iter != prev) {
+  if (iter != prev) {
     prev->right = iter->left;
   }
   return iter;

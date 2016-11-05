@@ -34,12 +34,15 @@ BST *create_node(Key key, Element element) {
  */
 BST *detach_smallest(BST **root) {
   BST *iter = *root;
-  BST *prev = iter;
-  while (iter != NULL && iter->left != NULL) {
+  BST *prev = *root;
+  if (iter == NULL) {
+    return NULL;
+  }
+  while (iter->left != NULL) {
     prev = iter;
     iter = iter->left;
   }
-  if (iter != NULL && iter != prev) {
+  if (iter != prev) {
     prev->left = iter->right;
   }
   return iter;
@@ -51,12 +54,15 @@ BST *detach_smallest(BST **root) {
  */
 BST *detach_greatest(BST **root) {
   BST *iter = *root;
-  BST *prev = iter;
-  while (iter != NULL && iter->right != NULL) {
+  BST *prev = *root;
+  if (iter == NULL) {
+    return NULL;
+  }
+  while (iter->right != NULL) {
     prev = iter;
     iter = iter->right;
   }
-  if (iter != NULL && iter != prev) {
+  if (iter != prev) {
     prev->right = iter->left;
   }
   return iter;
@@ -236,9 +242,9 @@ void BST_remove(Report *report, BST **root, Key key) {
         } else {
           replacement->right = NULL;
         }
-        tree = replacement;
+        *root = replacement;
       } else {
-        tree = NULL;
+        *root = NULL;
       }
     } else if (key_less_than(key, tree->key)) {
       /* Propagate removal to the left child. */
@@ -248,8 +254,6 @@ void BST_remove(Report *report, BST **root, Key key) {
       BST_remove(report, &tree->right, key);
     }
   }
-  /* Write back any changes that have been made. */
-  *root = tree;
 }
 
 BST *lowest_common_ancestor(BST *tree, Key a, Key b) {
