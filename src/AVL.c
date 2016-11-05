@@ -289,12 +289,12 @@ void AVL_remove(Report *report, AVL **root, Key key) {
         if (left != replacement) {
           replacement->left = left;
         } else {
-          replacement->left = NULL;
+          replacement->left = left->left;
         }
         if (right != replacement) {
           replacement->right = right;
         } else {
-          replacement->right = NULL;
+          replacement->right = right->right;
         }
         *root = replacement;
         tree->height = max(AVL_height(tree->left), AVL_height(tree->right)) + 1;

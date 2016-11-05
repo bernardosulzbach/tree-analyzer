@@ -235,12 +235,12 @@ void BST_remove(Report *report, BST **root, Key key) {
         if (left != replacement) {
           replacement->left = left;
         } else {
-          replacement->left = NULL;
+          replacement->left = left->left;
         }
         if (right != replacement) {
           replacement->right = right;
         } else {
-          replacement->right = NULL;
+          replacement->right = right->right;
         }
         *root = replacement;
       } else {
