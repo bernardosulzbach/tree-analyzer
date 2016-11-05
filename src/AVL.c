@@ -214,14 +214,19 @@ static void rotate_left(AVL **root) {
 void rebalance(Report *report, AVL **root) {
   AVL *tree = *root;
   if (tree != NULL) {
+    /* Tree is right heavy. */
     if (get_balance(tree) < -1) {
-      if (get_balance(tree->left) > 0) {
-        rotate_right(&tree->left);
+      /* Right subtree is left-heavy. */
+      if (get_balance(tree->right) > 0) {
+        rotate_right(&tree->right);
         report->rotations++;
       }
       rotate_left(root);
       report->rotations++;
-    } else if (get_balance(tree) > 1) {
+    }
+    /* Tree is left heavy. */
+    else if (get_balance(tree) > 1) {
+      /* Left subtree is right-heavy. */
       if (get_balance(tree->left) < 0) {
         rotate_left(&tree->left);
         report->rotations++;
