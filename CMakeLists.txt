@@ -3,7 +3,7 @@ cmake_minimum_required (VERSION 2.8.7)
 project (tree-comparison C)
 
 if (("${CMAKE_C_COMPILER_ID}" STREQUAL "Clang") OR ("${CMAKE_C_COMPILER_ID}" STREQUAL "GNU"))
-    set (CMAKE_C_FLAGS "-Wall -Wextra -Wpedantic -std=c89")
+    set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra -Wpedantic -std=c89")
 endif ()
 
 set (CMAKE_EXPORT_COMPILE_COMMANDS 1)
