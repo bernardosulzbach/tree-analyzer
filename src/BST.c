@@ -42,9 +42,8 @@ BST *detach_smallest(BST **root) {
     prev = iter;
     iter = iter->left;
   }
-  if (iter != prev) {
-    prev->left = iter->right;
-  }
+  /* If we did not walk, remove the tie from our parent. */
+  prev->left = iter == prev ? NULL : iter->right;
   return iter;
 }
 
@@ -62,9 +61,8 @@ BST *detach_greatest(BST **root) {
     prev = iter;
     iter = iter->right;
   }
-  if (iter != prev) {
-    prev->right = iter->left;
-  }
+  /* If we did not walk, remove the tie from our parent. */
+  prev->right = iter == prev ? NULL : iter->left;
   return iter;
 }
 
@@ -218,7 +216,7 @@ void BST_remove(Report *report, BST **root, Key key) {
   BST *left = NULL;
   BST *right = NULL;
   BST *replacement = NULL;
-  if (tree != NULL) {
+  while (tree != NULL) {
     report->comparisons++;
     if (tree->key == key) {
       if (tree->left != NULL) {
@@ -242,16 +240,17 @@ void BST_remove(Report *report, BST **root, Key key) {
         } else {
           replacement->right = right->right;
         }
-        *root = replacement;
-      } else {
-        *root = NULL;
       }
+      *root = replacement;
+      tree = NULL;
     } else if (key_less_than(key, tree->key)) {
       /* Propagate removal to the left child. */
-      BST_remove(report, &tree->left, key);
+      root = &tree->left;
+      tree = *root;
     } else {
       /* Propagate removal to the right child. */
-      BST_remove(report, &tree->right, key);
+      root = &tree->right;
+      tree = *root;
     }
   }
 }
