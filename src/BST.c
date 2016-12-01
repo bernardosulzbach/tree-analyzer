@@ -173,14 +173,15 @@ int BST_contains(Report *report, BST *tree, Key key) {
  */
 Element BST_get(Report *report, BST *tree, Key key) {
   Element element = NULL_ELEMENT;
-  if (tree != NULL) {
+  while (tree != NULL) {
     report->comparisons++;
     if (tree->key == key) {
       element = tree->data;
+      tree = NULL;
     } else if (key_less_than(key, tree->key)) {
-      element = BST_get(report, tree->left, key);
+      tree = tree->left;
     } else {
-      element = BST_get(report, tree->right, key);
+      tree = tree->right;
     }
   }
   return element;
