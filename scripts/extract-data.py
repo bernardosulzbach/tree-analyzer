@@ -1,12 +1,19 @@
 # Produces two CSV files (one for unsorted input and one for sorted input).
 # Each of which has lines with 7 ordered values:
-# ID,
-# BST Insertion Time,
-# BST Query Time,
-# BST Removal Time,
-# AVL Insertion Time,
-# AVL Query Time,
-# AVL Removal Time
+# ID
+# BST Insertion Duration
+# BST Insertion Comparisons
+# BST Query Duration
+# BST Query Comparisons
+# BST Removal Duration
+# BST Removal Comparisons
+# AVL Insertion Duration
+# AVL Insertion Comparisons
+# AVL Query Duration
+# AVL Query Comparisons
+# AVL Removal Duration
+# AVL Removal Comparisons
+# AVL Removal Comparisons
 
 import csv
 import sys
@@ -61,9 +68,11 @@ def get_header():
     header = ["ID"]
     trees = ["BST", "AVL"]
     operations = ["Insertion", "Query", "Removal"]
+    metrics = ["Duration", "Comparisons"]
     for tree in trees:
         for operation in operations:
-            header.append(tree + " " + operation + " Time")
+            for metric in metrics:
+                header.append(tree + ' ' + operation + ' ' + metric)
     return header
 
 
