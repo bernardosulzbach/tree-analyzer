@@ -66,14 +66,25 @@ def splitter(entries):
 
 def get_header():
     header = ["ID"]
-    trees = ["BST", "AVL"]
     operations = ["Insertion", "Query", "Removal"]
+    trees = ["BST", "AVL"]
     metrics = ["Duration", "Comparisons"]
-    for tree in trees:
-        for operation in operations:
+    for operation in operations:
+        for tree in trees:
             for metric in metrics:
                 header.append(tree + ' ' + operation + ' ' + metric)
     return header
+
+
+def integer_from_key(key):
+    x = 0
+    for c in key:
+        if c.isdigit():
+            x *= 10
+            x += int(c)
+        else:
+            break
+    return x
 
 
 with open(filename + '.csv', 'w') as f:
@@ -81,7 +92,7 @@ with open(filename + '.csv', 'w') as f:
     rows = []
     for key in data:
         if 'sorted' not in key:
-            rows.append([key] + data[key])
+            rows.append([integer_from_key(key)] + data[key])
     writer.writerow(get_header())
     for row in sorted(rows):
         writer.writerow(row)
@@ -91,7 +102,7 @@ with open(filename + '.sorted' + '.csv', 'w') as f:
     rows = []
     for key in data:
         if 'sorted' in key:
-            rows.append([key] + data[key])
+            rows.append([integer_from_key(key)] + data[key])
     writer.writerow(get_header())
     for row in sorted(rows):
         writer.writerow(row)

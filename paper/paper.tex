@@ -21,6 +21,8 @@
 %% \documentclass[final,5p,times]{elsarticle}
 %% \documentclass[final,5p,times,twocolumn]{elsarticle}
 
+%% Get to see line width.
+\usepackage{layouts}
 %% The graphicx package provides the includegraphics command.
 \usepackage{graphicx}
 %% The amssymb package provides various useful mathematical symbols
@@ -32,6 +34,12 @@
 %% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
 %% for the whole article with \linenumbers after \end{frontmatter}.
 \usepackage{lineno}
+
+% A better font.
+\usepackage[charter]{mathdesign}
+% \def\rmdefault{bch} % not scaled
+% \def\ttdefault{blg}
+\usepackage{inconsolata}
 
 %% natbib.sty is loaded by default. However, natbib options can be
 %% provided with \biboptions{...} command. Following options are
@@ -92,7 +100,6 @@
     \ead{mafagafogigante@gmail.com}
 
     \author{Leonardo Ferrazza}
-    \ead{ferrazzaleonardo@gmail.com}
 
     \address{Rio Grande do Sul, Brazil}
 
@@ -108,9 +115,34 @@
 
 \end{frontmatter}
 
-\linenumbers
+% \linenumbers
+
+\section{Introduction}
+
+\subsection{Differences}
+
+Queries on AVL trees are identical to queries on any unbalanced binary search
+tree (BST). However, because the height of the tree is bound, the number of
+comparisons tends to be smaller for large enough \(n\).
+
+Insertions on AVL trees are more complex than insertions on unbalanced BSTs.
+This is a consequence of the need to preserve the tree balance.
+
+Removal on AVL trees is also more complex than removal on unbalanced BSTs, as
+removing nodes may lead to an unbalanced AVL tree and, therefore, trigger a
+rebalancing operation.
+
+\subsection{Experiments Description}
+
+We have implemented both an unbalanced BST and an AVL tree using ISO C and
+compared both performance-wise using data sets of unsorted (shuffled) and sorted
+32-bit integers.
+
+Details regarding compiler version, compiler flags and execution environment
+may be found in \ref{ap:ENV}.
 
 \section{Expected Results}
+
 
 
 \subsection{Advantages of Balanced Trees}
@@ -119,12 +151,6 @@
     \log_2 \left(n + 1\right) \leq h < c \log_2 \left(n + 2\right) + b
 \end{equation}
 
-Read-only operations on an AVL tree are identical to the read-only operations
-on any unbalanced binary search tree. However, because they height of the tree
-is bound by \ref{eq:AVLH}, the number of comparisons is smaller for large enough
-n.
-
-
 \subsection{Drawbacks of Balanced Trees}
 
 AVL trees are more rigidly balanced than red-black trees, leading to faster
@@ -132,7 +158,23 @@ retrieval, at the cost of slower insertion and deletion.
 
 \section{Experimental Results}
 
-To be done.
+\subsection{Unordered Input}
+\subsubsection{Insertion}
+\begin{center}\includegraphics[width=\linewidth]{assets/insertion-duration.png}\end{center}
+\begin{center}\includegraphics[width=\linewidth]{assets/insertion-comparisons.png}\end{center}
+
+\begin{center}\includegraphics[width=\linewidth]{assets/query-duration.png}\end{center}
+\begin{center}\includegraphics[width=\linewidth]{assets/query-comparisons.png}\end{center}
+\begin{center}\includegraphics[width=\linewidth]{assets/removal-duration.png}\end{center}
+\begin{center}\includegraphics[width=\linewidth]{assets/removal-comparisons.png}\end{center}
+
+\subsection{Sorted Input}
+\begin{center}\includegraphics[width=\linewidth]{assets/sorted-insertion-duration.png}\end{center}
+\begin{center}\includegraphics[width=\linewidth]{assets/sorted-insertion-comparisons.png}\end{center}
+\begin{center}\includegraphics[width=\linewidth]{assets/sorted-query-duration.png}\end{center}
+\begin{center}\includegraphics[width=\linewidth]{assets/sorted-query-comparisons.png}\end{center}
+\begin{center}\includegraphics[width=\linewidth]{assets/sorted-removal-duration.png}\end{center}
+\begin{center}\includegraphics[width=\linewidth]{assets/sorted-removal-comparisons.png}\end{center}
 
 \section{Conclusions}
 
@@ -142,13 +184,15 @@ To be done.
 
 \section{Execution Environment} \label{ap:ENV}
 
-The code was compiled with GCC 5.3.1 using the compilation options
-\texttt{-std=c89}, \texttt{-O3}, and \texttt{-DNDEBUG}.
+The compiler used was a 64-bit packaged build of GCC 5.3.1.
 
-The benchmark was performed on
+The compilation flags were \texttt{-std=c89}, \texttt{-O3}, and
+\texttt{-DNDEBUG}.
+
+Profiling was performed on a workstation with the following specifications:
 \begin{itemize}
-    \item Fedora 23 64-bit with Kernel 4.7.10-100
-    \item AMD FX-8320E Eight-Core Processor
+    \item Fedora Workstation 23 64-bit with Kernel 4.7.10-100
+    \item AMD FX-8320E Eight-Core Processor (8M cache, 3.2 GHz)
     \item 32 GB (4 x 8 GB) of 1600 MHz RAM
 \end{itemize}
 
