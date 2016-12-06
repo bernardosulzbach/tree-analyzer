@@ -143,18 +143,16 @@ may be found in \ref{ap:ENV}.
 
 \section{Expected Results}
 
-
-
-\subsection{Advantages of Balanced Trees}
-
-\begin{equation} \label{eq:AVLH}
-    \log_2 \left(n + 1\right) \leq h < c \log_2 \left(n + 2\right) + b
-\end{equation}
-
-\subsection{Drawbacks of Balanced Trees}
+It is expected that the balanced tree will outperform its unbalanced analogous
+for large enough \(n\). Sorted input should make the difference substantially
+more evident as the insertion complexity for the unbalanced BST degenerates to
+\(\Theta\left(n^2\right)\) as the tree will behave as a linked list.
 
 AVL trees are more rigidly balanced than red-black trees, leading to faster
-retrieval, at the cost of slower insertion and deletion.
+retrieval, at the cost of slower insertion and deletion. However, as the main
+objective is to compare the performance differences between unbalanced BSTs and
+balanced BSTs, both AVL trees or RB trees are viable representatives of
+balanced BSTs.
 
 \section{Experimental Results}
 
