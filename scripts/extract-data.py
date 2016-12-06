@@ -1,19 +1,4 @@
 # Produces two CSV files (one for unsorted input and one for sorted input).
-# Each of which has lines with 7 ordered values:
-# ID
-# BST Insertion Duration
-# BST Insertion Comparisons
-# BST Query Duration
-# BST Query Comparisons
-# BST Removal Duration
-# BST Removal Comparisons
-# AVL Insertion Duration
-# AVL Insertion Comparisons
-# AVL Query Duration
-# AVL Query Comparisons
-# AVL Removal Duration
-# AVL Removal Comparisons
-# AVL Removal Comparisons
 
 import csv
 import sys
@@ -44,11 +29,15 @@ with open(filename, 'r') as f:
         if not line.startswith(' '):
             group = derive_group(line)
         elif 'Time' in line:
+            # The last token is 'ms', we must get the one before it.
             ms = int(line.split()[-2])
             expand(data, group, ms)
+        elif 'Height' in line:
+            expand(data, group, int(line.split()[-1]))
+        elif 'Factor' in line:
+            expand(data, group, int(line.split()[-1]))
         elif 'Comparisons' in line:
-            comparisons = int(line.split()[-1])
-            expand(data, group, comparisons)
+            expand(data, group, int(line.split()[-1]))
 
 
 def splitter(entries):
@@ -65,10 +54,10 @@ def splitter(entries):
 
 
 def get_header():
-    header = ["ID"]
+    header = ["Elements"]
     operations = ["Insertion", "Query", "Removal"]
     trees = ["BST", "AVL"]
-    metrics = ["Duration", "Comparisons"]
+    metrics = ["Duration", "Height", "Factor", "Comparisons"]
     for operation in operations:
         for tree in trees:
             for metric in metrics:
@@ -88,7 +77,7 @@ def integer_from_key(key):
 
 
 with open(filename + '.csv', 'w') as f:
-    writer = csv.writer(f)
+    writer = csv.writer(f, quotechar='"')
     rows = []
     for key in data:
         if 'sorted' not in key:
@@ -98,7 +87,7 @@ with open(filename + '.csv', 'w') as f:
         writer.writerow(row)
 
 with open(filename + '.sorted' + '.csv', 'w') as f:
-    writer = csv.writer(f)
+    writer = csv.writer(f, quotechar='"')
     rows = []
     for key in data:
         if 'sorted' in key:

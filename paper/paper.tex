@@ -41,6 +41,11 @@
 % \def\ttdefault{blg}
 \usepackage{inconsolata}
 
+% Required to fit the tables.
+\usepackage{pdflscape}
+\usepackage{rotating}
+\usepackage{tabularx}
+
 %% natbib.sty is loaded by default. However, natbib options can be
 %% provided with \biboptions{...} command. Following options are
 %% valid:
@@ -134,19 +139,24 @@ rebalancing operation.
 
 \subsection{Experiments Description}
 
-We have implemented both an unbalanced BST and an AVL tree using ISO C and
-compared both performance-wise using data sets of unsorted (shuffled) and sorted
-32-bit integers.
+We implemented both an unbalanced BST and an AVL tree using ISO C and compared
+both performance-wise using data sets of 32-bit integers.
+
+There were in total fourteen input sets. The first seven input sets were the
+first \(n\) positive integers, shuffled, where \(n\) was a power of ten between
+\(1\) and \(10^6\). The remaining seven input sets were obtained by sorting the
+first seven input sets.
 
 Details regarding compiler version, compiler flags and execution environment
 may be found in \ref{ap:ENV}.
 
 \section{Expected Results}
 
-It is expected that the balanced tree will outperform its unbalanced analogous
-for large enough \(n\). Sorted input should make the difference substantially
-more evident as the insertion complexity for the unbalanced BST degenerates to
-\(\Theta\left(n^2\right)\) as the tree will behave as a linked list.
+It is expected that the balanced tree will outperform its unbalanced
+counterpart for large enough \(n\). Sorted input should make the difference
+substantially more evident as the insertion time complexity for the unbalanced
+BST degenerates to \(\Theta\left(n^2\right)\) and the tree works as a linked
+list.
 
 AVL trees are more rigidly balanced than red-black trees, leading to faster
 retrieval, at the cost of slower insertion and deletion. However, as the main
@@ -156,27 +166,70 @@ balanced BSTs.
 
 \section{Experimental Results}
 
+There are sixteen tables which present all available experimental data.
+
+The height and factor tables of the trees after removing all elements were
+omitted as they were only zeros.
+
+The height and factor tables are also not repeated after the query results as
+none of the tested implementations mutate the tree on queries, which resulted
+in identical tables.
+
 \subsection{Unordered Input}
 \subsubsection{Insertion}
-\begin{center}\includegraphics[width=\linewidth]{assets/insertion-duration.png}\end{center}
-\begin{center}\includegraphics[width=\linewidth]{assets/insertion-comparisons.png}\end{center}
+\input{inputs/insertion-comparisons.tex}
+
+\input{inputs/insertion-duration.tex}
+
+\input{inputs/insertion-factor.tex}
+
+\input{inputs/insertion-height.tex}
+
 \subsubsection{Query}
-\begin{center}\includegraphics[width=\linewidth]{assets/query-duration.png}\end{center}
-\begin{center}\includegraphics[width=\linewidth]{assets/query-comparisons.png}\end{center}
+\input{inputs/query-comparisons.tex}
+
+\input{inputs/query-duration.tex}
+
+% \input{inputs/query-factor.tex}
+
+% \input{inputs/query-height.tex}
+
 \subsubsection{Removal}
-\begin{center}\includegraphics[width=\linewidth]{assets/removal-duration.png}\end{center}
-\begin{center}\includegraphics[width=\linewidth]{assets/removal-comparisons.png}\end{center}
+\input{inputs/removal-comparisons.tex}
+
+\input{inputs/removal-duration.tex}
+
+% \input{inputs/removal-factor.tex}
+
+% \input{inputs/removal-height.tex}
 
 \subsection{Sorted Input}
 \subsubsection{Insertion}
-\begin{center}\includegraphics[width=\linewidth]{assets/sorted-insertion-duration.png}\end{center}
-\begin{center}\includegraphics[width=\linewidth]{assets/sorted-insertion-comparisons.png}\end{center}
+\input{inputs/sorted-insertion-comparisons.tex}
+
+\input{inputs/sorted-insertion-duration.tex}
+
+\input{inputs/sorted-insertion-factor.tex}
+
+\input{inputs/sorted-insertion-height.tex}
+
 \subsubsection{Query}
-\begin{center}\includegraphics[width=\linewidth]{assets/sorted-query-duration.png}\end{center}
-\begin{center}\includegraphics[width=\linewidth]{assets/sorted-query-comparisons.png}\end{center}
+\input{inputs/sorted-query-comparisons.tex}
+
+\input{inputs/sorted-query-duration.tex}
+
+% \input{inputs/sorted-query-factor.tex}
+
+% \input{inputs/sorted-query-height.tex}
+
 \subsubsection{Removal}
-\begin{center}\includegraphics[width=\linewidth]{assets/sorted-removal-duration.png}\end{center}
-\begin{center}\includegraphics[width=\linewidth]{assets/sorted-removal-comparisons.png}\end{center}
+\input{inputs/sorted-removal-comparisons.tex}
+
+\input{inputs/sorted-removal-duration.tex}
+
+% \input{inputs/sorted-removal-factor.tex}
+
+% \input{inputs/sorted-removal-height.tex}
 
 \section{Conclusions}
 

@@ -59,7 +59,8 @@ CMakeCache.txt
 # Project
 build/
 input/
-paper/assets/*.png
+paper/inputs/*.tex
+results/*.csv
 
 # LaTeX
 *.aux
