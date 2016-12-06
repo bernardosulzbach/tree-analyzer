@@ -8,3 +8,5 @@ $ cd build
 $ cmake ..
 $ make -j
 ```
+
+The scripts directory has files to create images and CSV exports from the data.
