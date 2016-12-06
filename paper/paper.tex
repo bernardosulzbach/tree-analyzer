@@ -162,23 +162,32 @@ retrieval, at the cost of slower insertion and deletion.
 \subsubsection{Insertion}
 \begin{center}\includegraphics[width=\linewidth]{assets/insertion-duration.png}\end{center}
 \begin{center}\includegraphics[width=\linewidth]{assets/insertion-comparisons.png}\end{center}
-
+\subsubsection{Query}
 \begin{center}\includegraphics[width=\linewidth]{assets/query-duration.png}\end{center}
 \begin{center}\includegraphics[width=\linewidth]{assets/query-comparisons.png}\end{center}
+\subsubsection{Removal}
 \begin{center}\includegraphics[width=\linewidth]{assets/removal-duration.png}\end{center}
 \begin{center}\includegraphics[width=\linewidth]{assets/removal-comparisons.png}\end{center}
 
 \subsection{Sorted Input}
+\subsubsection{Insertion}
 \begin{center}\includegraphics[width=\linewidth]{assets/sorted-insertion-duration.png}\end{center}
 \begin{center}\includegraphics[width=\linewidth]{assets/sorted-insertion-comparisons.png}\end{center}
+\subsubsection{Query}
 \begin{center}\includegraphics[width=\linewidth]{assets/sorted-query-duration.png}\end{center}
 \begin{center}\includegraphics[width=\linewidth]{assets/sorted-query-comparisons.png}\end{center}
+\subsubsection{Removal}
 \begin{center}\includegraphics[width=\linewidth]{assets/sorted-removal-duration.png}\end{center}
 \begin{center}\includegraphics[width=\linewidth]{assets/sorted-removal-comparisons.png}\end{center}
 
 \section{Conclusions}
 
-To be done.
+Based on the experimental results it can be concluded that for most real-world
+scenarios, balanced binary search trees such as AVL trees and RB trees are a
+better choice. The increased code complexity of the insertion and removal
+operations pays off as the average operation duration is lowered, improving
+overall application performance except when \(n < 10\), where both balanced and
+unbalanced trees perform similarly.
 
 \appendix
 
