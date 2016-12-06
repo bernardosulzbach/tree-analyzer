@@ -1,0 +1,630 @@
+Inserting from n1.txt
+ Statistics for BST:
+  Time: 0 ms
+  Nodes: 1
+  Height: 1
+  Factor: 0
+  Comparisons: 0
+  Rotations: 0
+ Statistics for AVL:
+  Time: 0 ms
+  Nodes: 1
+  Height: 1
+  Factor: 0
+  Comparisons: 0
+  Rotations: 0
+Querying from n1.txt
+ Statistics for BST:
+  Time: 0 ms
+  Nodes: 1
+  Height: 1
+  Factor: 0
+  Comparisons: 1
+  Rotations: 0
+ Statistics for AVL:
+  Time: 0 ms
+  Nodes: 1
+  Height: 1
+  Factor: 0
+  Comparisons: 1
+  Rotations: 0
+Removing from n1.txt
+ Statistics for BST:
+  Time: 0 ms
+  Nodes: 0
+  Height: 0
+  Factor: 0
+  Comparisons: 1
+  Rotations: 0
+ Statistics for AVL:
+  Time: 0 ms
+  Nodes: 0
+  Height: 0
+  Factor: 0
+  Comparisons: 1
+  Rotations: 0
+Inserting from n10.txt
+ Statistics for BST:
+  Time: 0 ms
+  Nodes: 10
+  Height: 6
+  Factor: 5
+  Comparisons: 27
+  Rotations: 0
+ Statistics for AVL:
+  Time: 0 ms
+  Nodes: 10
+  Height: 4
+  Factor: 1
+  Comparisons: 23
+  Rotations: 4
+Querying from n10.txt
+ Statistics for BST:
+  Time: 0 ms
+  Nodes: 10
+  Height: 6
+  Factor: 5
+  Comparisons: 37
+  Rotations: 0
+ Statistics for AVL:
+  Time: 0 ms
+  Nodes: 10
+  Height: 4
+  Factor: 1
+  Comparisons: 29
+  Rotations: 0
+Removing from n10.txt
+ Statistics for BST:
+  Time: 0 ms
+  Nodes: 0
+  Height: 0
+  Factor: 0
+  Comparisons: 22
+  Rotations: 0
+ Statistics for AVL:
+  Time: 0 ms
+  Nodes: 0
+  Height: 0
+  Factor: 0
+  Comparisons: 21
+  Rotations: 1
+Inserting from n100.txt
+ Statistics for BST:
+  Time: 0 ms
+  Nodes: 100
+  Height: 17
+  Factor: 8
+  Comparisons: 699
+  Rotations: 0
+ Statistics for AVL:
+  Time: 0 ms
+  Nodes: 100
+  Height: 8
+  Factor: 1
+  Comparisons: 540
+  Rotations: 74
+Querying from n100.txt
+ Statistics for BST:
+  Time: 0 ms
+  Nodes: 100
+  Height: 17
+  Factor: 8
+  Comparisons: 799
+  Rotations: 0
+ Statistics for AVL:
+  Time: 0 ms
+  Nodes: 100
+  Height: 8
+  Factor: 1
+  Comparisons: 591
+  Rotations: 0
+Removing from n100.txt
+ Statistics for BST:
+  Time: 0 ms
+  Nodes: 0
+  Height: 0
+  Factor: 0
+  Comparisons: 545
+  Rotations: 0
+ Statistics for AVL:
+  Time: 0 ms
+  Nodes: 0
+  Height: 0
+  Factor: 0
+  Comparisons: 442
+  Rotations: 107
+Inserting from n1000.txt
+ Statistics for BST:
+  Time: 0 ms
+  Nodes: 1000
+  Height: 22
+  Factor: 10
+  Comparisons: 10301
+  Rotations: 0
+ Statistics for AVL:
+  Time: 0 ms
+  Nodes: 1000
+  Height: 12
+  Factor: 1
+  Comparisons: 8647
+  Rotations: 689
+Querying from n1000.txt
+ Statistics for BST:
+  Time: 0 ms
+  Nodes: 1000
+  Height: 22
+  Factor: 10
+  Comparisons: 11301
+  Rotations: 0
+ Statistics for AVL:
+  Time: 0 ms
+  Nodes: 1000
+  Height: 12
+  Factor: 1
+  Comparisons: 9162
+  Rotations: 0
+Removing from n1000.txt
+ Statistics for BST:
+  Time: 0 ms
+  Nodes: 0
+  Height: 0
+  Factor: 0
+  Comparisons: 8469
+  Rotations: 0
+ Statistics for AVL:
+  Time: 0 ms
+  Nodes: 0
+  Height: 0
+  Factor: 0
+  Comparisons: 7652
+  Rotations: 1483
+Inserting from n10000.txt
+ Statistics for BST:
+  Time: 6 ms
+  Nodes: 10000
+  Height: 31
+  Factor: 14
+  Comparisons: 153375
+  Rotations: 0
+ Statistics for AVL:
+  Time: 5 ms
+  Nodes: 10000
+  Height: 16
+  Factor: 1
+  Comparisons: 120955
+  Rotations: 7019
+Querying from n10000.txt
+ Statistics for BST:
+  Time: 2 ms
+  Nodes: 10000
+  Height: 31
+  Factor: 14
+  Comparisons: 163375
+  Rotations: 0
+ Statistics for AVL:
+  Time: 2 ms
+  Nodes: 10000
+  Height: 16
+  Factor: 1
+  Comparisons: 125663
+  Rotations: 0
+Removing from n10000.txt
+ Statistics for BST:
+  Time: 3 ms
+  Nodes: 0
+  Height: 0
+  Factor: 0
+  Comparisons: 135495
+  Rotations: 0
+ Statistics for AVL:
+  Time: 4 ms
+  Nodes: 0
+  Height: 0
+  Factor: 0
+  Comparisons: 109559
+  Rotations: 15374
+Inserting from n100000.txt
+ Statistics for BST:
+  Time: 224 ms
+  Nodes: 100000
+  Height: 480
+  Factor: 451
+  Comparisons: 16793479
+  Rotations: 0
+ Statistics for AVL:
+  Time: 70 ms
+  Nodes: 100000
+  Height: 20
+  Factor: 1
+  Comparisons: 1575573
+  Rotations: 70419
+Querying from n100000.txt
+ Statistics for BST:
+  Time: 265 ms
+  Nodes: 100000
+  Height: 480
+  Factor: 451
+  Comparisons: 16893479
+  Rotations: 0
+ Statistics for AVL:
+  Time: 41 ms
+  Nodes: 100000
+  Height: 20
+  Factor: 1
+  Comparisons: 1602141
+  Rotations: 0
+Removing from n100000.txt
+ Statistics for BST:
+  Time: 200 ms
+  Nodes: 0
+  Height: 0
+  Factor: 0
+  Comparisons: 15944977
+  Rotations: 0
+ Statistics for AVL:
+  Time: 65 ms
+  Nodes: 0
+  Height: 0
+  Factor: 0
+  Comparisons: 1459413
+  Rotations: 152820
+Inserting from n1000000.txt
+ Statistics for BST:
+  Time: 66851 ms
+  Nodes: 1000000
+  Height: 6771
+  Factor: 6741
+  Comparisons: 3278655624
+  Rotations: 0
+ Statistics for AVL:
+  Time: 860 ms
+  Nodes: 1000000
+  Height: 24
+  Factor: 1
+  Comparisons: 19562999
+  Rotations: 703121
+Querying from n1000000.txt
+ Statistics for BST:
+  Time: 64830 ms
+  Nodes: 1000000
+  Height: 6771
+  Factor: 6741
+  Comparisons: 3279655624
+  Rotations: 0
+ Statistics for AVL:
+  Time: 472 ms
+  Nodes: 1000000
+  Height: 24
+  Factor: 1
+  Comparisons: 19347792
+  Rotations: 0
+Removing from n1000000.txt
+ Statistics for BST:
+  Time: 10839 ms
+  Nodes: 0
+  Height: 0
+  Factor: 0
+  Comparisons: 848615070
+  Rotations: 0
+ Statistics for AVL:
+  Time: 762 ms
+  Nodes: 0
+  Height: 0
+  Factor: 0
+  Comparisons: 18057865
+  Rotations: 1538041
+Inserting from n1sorted.txt
+ Statistics for BST:
+  Time: 0 ms
+  Nodes: 1
+  Height: 1
+  Factor: 0
+  Comparisons: 0
+  Rotations: 0
+ Statistics for AVL:
+  Time: 0 ms
+  Nodes: 1
+  Height: 1
+  Factor: 0
+  Comparisons: 0
+  Rotations: 0
+Querying from n1sorted.txt
+ Statistics for BST:
+  Time: 0 ms
+  Nodes: 1
+  Height: 1
+  Factor: 0
+  Comparisons: 1
+  Rotations: 0
+ Statistics for AVL:
+  Time: 0 ms
+  Nodes: 1
+  Height: 1
+  Factor: 0
+  Comparisons: 1
+  Rotations: 0
+Removing from n1sorted.txt
+ Statistics for BST:
+  Time: 0 ms
+  Nodes: 0
+  Height: 0
+  Factor: 0
+  Comparisons: 1
+  Rotations: 0
+ Statistics for AVL:
+  Time: 0 ms
+  Nodes: 0
+  Height: 0
+  Factor: 0
+  Comparisons: 1
+  Rotations: 0
+Inserting from n10sorted.txt
+ Statistics for BST:
+  Time: 0 ms
+  Nodes: 10
+  Height: 10
+  Factor: 9
+  Comparisons: 45
+  Rotations: 0
+ Statistics for AVL:
+  Time: 0 ms
+  Nodes: 10
+  Height: 4
+  Factor: 1
+  Comparisons: 25
+  Rotations: 6
+Querying from n10sorted.txt
+ Statistics for BST:
+  Time: 0 ms
+  Nodes: 10
+  Height: 10
+  Factor: 9
+  Comparisons: 55
+  Rotations: 0
+ Statistics for AVL:
+  Time: 0 ms
+  Nodes: 10
+  Height: 4
+  Factor: 1
+  Comparisons: 29
+  Rotations: 0
+Removing from n10sorted.txt
+ Statistics for BST:
+  Time: 0 ms
+  Nodes: 0
+  Height: 0
+  Factor: 0
+  Comparisons: 10
+  Rotations: 0
+ Statistics for AVL:
+  Time: 0 ms
+  Nodes: 0
+  Height: 0
+  Factor: 0
+  Comparisons: 22
+  Rotations: 3
+Inserting from n100sorted.txt
+ Statistics for BST:
+  Time: 0 ms
+  Nodes: 100
+  Height: 100
+  Factor: 99
+  Comparisons: 4950
+  Rotations: 0
+ Statistics for AVL:
+  Time: 0 ms
+  Nodes: 100
+  Height: 7
+  Factor: 0
+  Comparisons: 573
+  Rotations: 93
+Querying from n100sorted.txt
+ Statistics for BST:
+  Time: 0 ms
+  Nodes: 100
+  Height: 100
+  Factor: 99
+  Comparisons: 5050
+  Rotations: 0
+ Statistics for AVL:
+  Time: 0 ms
+  Nodes: 100
+  Height: 7
+  Factor: 0
+  Comparisons: 580
+  Rotations: 0
+Removing from n100sorted.txt
+ Statistics for BST:
+  Time: 0 ms
+  Nodes: 0
+  Height: 0
+  Factor: 0
+  Comparisons: 100
+  Rotations: 0
+ Statistics for AVL:
+  Time: 0 ms
+  Nodes: 0
+  Height: 0
+  Factor: 0
+  Comparisons: 449
+  Rotations: 44
+Inserting from n1000sorted.txt
+ Statistics for BST:
+  Time: 2 ms
+  Nodes: 1000
+  Height: 1000
+  Factor: 999
+  Comparisons: 499500
+  Rotations: 0
+ Statistics for AVL:
+  Time: 0 ms
+  Nodes: 1000
+  Height: 10
+  Factor: 0
+  Comparisons: 8977
+  Rotations: 990
+Querying from n1000sorted.txt
+ Statistics for BST:
+  Time: 3 ms
+  Nodes: 1000
+  Height: 1000
+  Factor: 999
+  Comparisons: 500500
+  Rotations: 0
+ Statistics for AVL:
+  Time: 0 ms
+  Nodes: 1000
+  Height: 10
+  Factor: 0
+  Comparisons: 8987
+  Rotations: 0
+Removing from n1000sorted.txt
+ Statistics for BST:
+  Time: 0 ms
+  Nodes: 0
+  Height: 0
+  Factor: 0
+  Comparisons: 1000
+  Rotations: 0
+ Statistics for AVL:
+  Time: 0 ms
+  Nodes: 0
+  Height: 0
+  Factor: 0
+  Comparisons: 6806
+  Rotations: 491
+Inserting from n10000sorted.txt
+ Statistics for BST:
+  Time: 233 ms
+  Nodes: 10000
+  Height: 10000
+  Factor: 9999
+  Comparisons: 49995000
+  Rotations: 0
+ Statistics for AVL:
+  Time: 3 ms
+  Nodes: 10000
+  Height: 14
+  Factor: 1
+  Comparisons: 123617
+  Rotations: 9986
+Querying from n10000sorted.txt
+ Statistics for BST:
+  Time: 328 ms
+  Nodes: 10000
+  Height: 10000
+  Factor: 9999
+  Comparisons: 50005000
+  Rotations: 0
+ Statistics for AVL:
+  Time: 2 ms
+  Nodes: 10000
+  Height: 14
+  Factor: 1
+  Comparisons: 123631
+  Rotations: 0
+Removing from n10000sorted.txt
+ Statistics for BST:
+  Time: 1 ms
+  Nodes: 0
+  Height: 0
+  Factor: 0
+  Comparisons: 10000
+  Rotations: 0
+ Statistics for AVL:
+  Time: 3 ms
+  Nodes: 0
+  Height: 0
+  Factor: 0
+  Comparisons: 92566
+  Rotations: 4988
+Inserting from n100000sorted.txt
+ Statistics for BST:
+  Time: 42717 ms
+  Nodes: 100000
+  Height: 100000
+  Factor: 99999
+  Comparisons: 4999950000
+  Rotations: 0
+ Statistics for AVL:
+  Time: 58 ms
+  Nodes: 100000
+  Height: 17
+  Factor: 0
+  Comparisons: 1568929
+  Rotations: 99983
+Querying from n100000sorted.txt
+ Statistics for BST:
+  Time: 55366 ms
+  Nodes: 100000
+  Height: 100000
+  Factor: 99999
+  Comparisons: 5000050000
+  Rotations: 0
+ Statistics for AVL:
+  Time: 29 ms
+  Nodes: 100000
+  Height: 17
+  Factor: 0
+  Comparisons: 1568946
+  Rotations: 0
+Removing from n100000sorted.txt
+ Statistics for BST:
+  Time: 15 ms
+  Nodes: 0
+  Height: 0
+  Factor: 0
+  Comparisons: 100000
+  Rotations: 0
+ Statistics for AVL:
+  Time: 50 ms
+  Nodes: 0
+  Height: 0
+  Factor: 0
+  Comparisons: 1195394
+  Rotations: 49984
+Inserting from n1000000sorted.txt
+ Statistics for BST:
+  Time: 6366534 ms
+  Nodes: 1000000
+  Height: 1000000
+  Factor: 999999
+  Comparisons: 499999500000
+  Rotations: 0
+ Statistics for AVL:
+  Time: 723 ms
+  Nodes: 1000000
+  Height: 20
+  Factor: 0
+  Comparisons: 18951425
+  Rotations: 999980
+Querying from n1000000sorted.txt
+ Statistics for BST:
+  Time: 7433141 ms
+  Nodes: 1000000
+  Height: 1000000
+  Factor: 999999
+  Comparisons: 500000500000
+  Rotations: 0
+ Statistics for AVL:
+  Time: 289 ms
+  Nodes: 1000000
+  Height: 20
+  Factor: 0
+  Comparisons: 18951445
+  Rotations: 0
+Removing from n1000000sorted.txt
+ Statistics for BST:
+  Time: 144 ms
+  Nodes: 0
+  Height: 0
+  Factor: 0
+  Comparisons: 1000000
+  Rotations: 0
+ Statistics for AVL:
+  Time: 583 ms
+  Nodes: 0
+  Height: 0
+  Factor: 0
+  Comparisons: 14320562
+  Rotations: 499981
